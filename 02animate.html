@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animate</title>
+</head>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            margin-left: 0px;
+            animation: box-run 5s linear 1;
+        }
+
+        /* 动画代码 */
+        @keyframes box-run{
+            0%{
+                margin-left: 0px;
+                margin-top: 0px;
+                
+                background: red;
+            }
+            25%{ 
+                width: 200px;
+                height: 200px;
+
+                margin-left: 500px;
+                margin-top: 0px;
+
+                background: green;
+
+            }
+            50%{ 
+                width: 400px;
+                height: 400px;
+
+                margin-left: 500px;
+                margin-top: 500px;
+
+                background: blue;
+            }
+            75%{ 
+                width: 100px;
+                height: 100px;
+
+                margin-left: 0px;
+                margin-top: 500px;
+
+                background-color: black;
+            }
+            100%{ 
+                margin-left: 0px;
+                margin-top: 0px;
+            }
+        }
+
+    </style>
+    
+<body>
+    <div class="box-run">
+        <div class="box"></div>
+    </div>
+
+</body>
+</html>

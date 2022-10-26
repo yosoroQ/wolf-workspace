@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d-立方体</title>
+   
+ 
+    <style>
+       .box-out {
+        width: 120px;
+        height: 200px;
+        margin: 20px;
+        position: fixed;
+        top: 50%;
+        right: 50%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        z-index: 22;
+    }
+
+    .box-out2 {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        transform-style: preserve-3d;
+        transform: rotateX(-30deg) rotateY(-80deg);
+        animation: rotate linear 5s infinite;
+    }
+
+    @keyframes rotate{
+            0%{
+                transform: rotateX(0deg);
+            }
+            25%{ 
+                transform: rotateX(360deg)
+            }
+            50%{ 
+                transform: rotateY(0deg)
+            }
+            75%{ 
+                transform: rotateY(360deg)
+            }
+            85%{ 
+                transform: rotateZ(0deg)
+            }
+            100%{ 
+                transform: rotateZ(360deg)
+            }
+        }
+
+    .box-out2 div {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        opacity: 0.8;
+        transition: all .4s;
+    }
+
+    .box-out2 .box1 {
+        transform: rotateY(0deg) translateZ(60px);
+        background: red;
+        opacity: 0.5;
+    }
+
+    .box-out2 .box2 {
+        transform: translateZ(-60px) rotateY(180deg);
+        background: green;
+        opacity: 0.5;}
+
+    .box-out2 .box3 {transform: rotateY(-90deg) translateZ(60px);background: black;
+        opacity: 0.5;}
+
+    .box-out2 .box4 {transform: rotateY(90deg) translateZ(60px);background: skyblue;
+        opacity: 0.5;}
+
+    .box-out2 .box5 {transform: rotateX(90deg) translateZ(60px);background: pink;
+        opacity: 0.5;}
+
+    .box-out2 .box6 {transform: rotateX(-90deg) translateZ(60px);background: fuchsia;
+        opacity: 0.5;}
+
+ 
+
+    </style>
+</head>
+ 
+<body>
+ 
+    <div class="box-out">
+        <div class="box-out2">
+            <div class="box1">1</div>
+            <div class="box2">2</div>
+            <div class="box3">3</div>
+            <div class="box4">4</div>
+            <div class="box5">5</div>
+            <div class="box6">6</div>
+        </div>
+        
+    </div>
+ 
+  
+ 
+</body>
+ 
+</html>
