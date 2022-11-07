@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06vue-选项卡</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+    <style>
+        .tab_cons {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+        .tab_con .active {
+            background: skyblue;
+
+        }
+
+        .tab_cons div {
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            display: none;
+        }
+
+        .tab_cons .current {
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="tab_con" id="app">
+        <H1>{{num}}</H1>
+        <div class="tab_btns">
+            <input :class="num==1?'active':''" type="button" value="按钮一" @mouseover="num = 1">
+            <input :class="num==2?'active':''" type="button" value="按钮二" @mouseover="num = 2">
+            <input :class="num==3?'active':''" type="button" value="按钮三" @mouseover="num = 3">
+        </div>
+        <div class="tab_cons">
+            <div :class="num==1?'current':''">按钮一对应的内容</div>
+            <div :class="num==2?'current':''">按钮二对应的内容</div>
+            <div :class="num==3?'current':''">按钮三对应的内容</div>
+        </div>
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                num:1
+        }
+        })
+    </script>
+</body>
+</html>

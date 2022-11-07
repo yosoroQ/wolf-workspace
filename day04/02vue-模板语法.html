@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02vue-模板语法</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <H1>{{msg}}</H1>
+        <!-- 可以执行一些简单的表达式 -->
+        <h2>{{num1}} + {{num2}} = {{num1 + num2}}</h2>
+        <h2>
+            <!-- 倒序 -->
+            {{str1.split("").reverse().join("")}}
+        </h2>
+        <h2>
+            <!-- 对比 -->
+             {{ num1>num2 ? num1:num2 }}
+        </h2>
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                msg:`
+                    渭城朝雨浥轻尘，客舍青青柳色新。
+                    劝君更尽一杯酒，西出阳关无故人。
+                `,
+                num1:10,
+                num2:50,
+                str1:"hello"
+        }
+        })
+    </script>
+</body>
+</html>

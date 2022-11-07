@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05vue-属性绑定</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: pink;
+        }
+        .user{
+            width: 100px;
+            height: 100px;
+            background: yellowgreen;
+        }
+        .user2{
+            width: 100px;
+            height: 100px;
+            background: cornsilk;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="app">
+        <!-- 一般的属性绑定 -->
+        <H1>{{msg}}</H1>
+        <img v-bind:src="img" v-bind:width="width" alt="">
+        <button @click="changeImg">更换图片</button>
+        <button @click="width+=1">放大图片</button>
+        <p>
+            <!-- v-bind可以简写为“:” -->
+            <a :href="qq">qq</a>
+        </p>
+
+
+        <!-- class绑定 -->
+        <div :class="{box:isShow,box2:!isShow}"></div>
+        <button @click="isShow= !isShow">true or false ?</button>
+
+        <div :class="class_Arr"></div>
+
+        <div :class="user.age >= 18 ? 'user' : 'user2'">
+            {{user.name}}、{{user.age}}、{{user.sex}}
+        </div>
+
+
+        <!-- style样式 -->
+        <div :style="{fontSize:'40px' }">文字1</div>
+        <div :style="{ fontSize:false?'40px' : '50px'}">文字2</div>
+        <div :style="[{fontSize:false?'40px' : '50px'},{background:'pink'}]">文字3</div>
+
+
+
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                msg:"你好！",
+                img:"./images/1.png",
+                width:"100",
+                qq:"http://www.qq.com",
+                isShow:true,
+                // isShow:false
+                class_Arr:['box3','box4'],
+                user:{
+                    name:"来了来了",
+                    age:15,
+                    sex:1
+                }
+        },
+            methods:{
+                changeImg(){
+                    this.img = './images/2.png'
+                    // this.img = './images/3.png'
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* 动画的CSS文件 */
+@keyframes run-1-1-1 {
+    0%{
+        transform:rotateY(0deg) translateX(-110px) translateY(-110px) translateZ(-110px) ;
+    }
+    100%{
+        transform:rotateY(-90deg) translateX(-110px) translateY(-110px) translateZ(-110px) ;
+    }
+}
+
+@keyframes run-2-1-1 {
+    0%{
+        transform:rotateY(0deg) translateX(0px) translateY(-110px) translateZ(-110px) ;
+    }
+    100%{
+        transform:rotateY(-90deg) translateX(0px) translateY(-110px) translateZ(-110px) ;
+    }
+}
+
+@keyframes run-3-1-1 {
+    0%{
+        transform:rotateY(0deg) translateX(110px) translateY(-110px) translateZ(-110px) ;
+    }
+    100%{
+        transform:rotateY(-90deg) translateX(110px) translateY(-110px) translateZ(-110px) ;
+    }
+}
+
+@keyframes run-2-1-2 {
+    0%{
+        transform:rotateY(0deg) translateX(0px) translateY(-110px) translateZ(0px) ;
+    }
+    100%{
+        transform: rotateY(-90deg) translateX(0px) translateY(-110px) translateZ(0px);
+    }
+}

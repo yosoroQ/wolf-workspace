@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            margin: 100px auto 0;
+            border: 1px pink solid;
+            border-radius: 50%;
+            position: relative;
+            background-color: whitesmoke;
+        }
+        .box-center{
+            width: 10px;
+            height: 10px;
+            background: #333;
+            position:absolute;
+            top : 50%;
+            left: 50%;
+            margin: -5px 0 0 -5px;
+            z-index: 10;
+        }
+        .time{
+            width: 10px;
+            height: 50px;
+            background: red;
+            position: absolute;
+            top : 50%;
+            left: 50%;
+            margin: -50px 0 0 -5px;
+
+            /*由于元素是以底进行旋转，所以我们需要修改元素的中心加点位置*/
+            transform-origin: 50% 100%;
+
+            animation: time-run 216000s linear infinite;
+
+        }
+        .min{
+            width: 7px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            top : 50%;
+            left: 50%;
+            margin: -100px 0 0 -4px;
+
+            /*由于元素是以底进行旋转，所以我们需要修改元素的中心加点位置*/
+            transform-origin: 50% 100%;
+
+            animation: min-run 3600s linear infinite;
+        }
+        .s{
+            width: 4px;
+            height: 130px;
+            background: pink;
+            position: absolute;
+            top : 50%;
+            left: 50%;
+            margin: -130px 0 0 -5px;
+
+            /*由于元素是以底进行旋转，所以我们需要修改元素的中心加点位置*/
+            transform-origin: 50% 100%;
+
+            animation: s-run 60s linear infinite;
+        }
+
+        .number-one{
+            position: absolute;
+            top : 18%;
+            margin: -50px 0 0 135px;
+        }
+        .number-two{
+            position: absolute;
+            top : 60%;
+            left: 50%;
+            margin: -50px 0 0 135px;
+        }
+        .number-three{
+            position: absolute;
+            top : 110%;
+            left: 5%;
+            margin: -50px 0 0 135px;
+        }
+        .number-four{
+            position: absolute;
+            top : 60%;
+            right: 95%;
+            margin: -50px 0 0 135px;
+        }
+        
+
+        @keyframes time-run{
+            0%{
+                transform: rotateZ(0deg);
+            }
+        
+            100%{ 
+                transform: rotateZ(365deg);
+
+            }
+        }
+        @keyframes min-run{
+            0%{
+                transform: rotateZ(0deg);
+            }
+        
+            100%{ 
+                transform: rotateZ(365deg);
+
+            }
+        }
+        @keyframes s-run{
+            0%{
+                transform: rotateZ(0deg);
+            }
+        
+            100%{ 
+                transform: rotateZ(365deg);
+
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="box">
+        <!-- 表芯 -->
+        <div class="box-center"></div>
+        <div class="time"></div>
+        <div class="min"></div>
+        <div class="s"></div>
+
+
+        <!-- 表盘数字 -->
+        <div class="number-one">12</div>
+		<div class="number-two">3</div>
+		<div class="number-three">6</div>
+		<div class="number-four">9</div>
+    </div>
+</body>
+</html>

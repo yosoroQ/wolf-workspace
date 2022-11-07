@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04vue-事件监听绑定</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <button v-on:click="showMsg">点点点</button>
+        <button v-on:click="showTest('n1n1nn11n11n1nn1')">点点点()</button>
+
+
+        <p>{{msg}}</p>
+        <p>
+            num = {{num}} <button @click="num+=1">+1</button>
+        </p>
+        <p>
+            num + num1= {{num}} + {{num1}} = {{num + num1}} <button @click="num+=1,num1+=1">+1</button>
+        </p>
+
+        <!-- 事件冒泡 -->
+        <div style="width:200px;height:200px;border:1px solid #000" @click="test">
+            <div @click.stop ="test2" style="width:100px;height:100px;background:slateblue" ></div>
+        </div>
+
+    </div>
+
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{       //当前vue应用的默认数据
+                msg:"吾问无为谓无无无无无无无无多AAAAAAAAAAAAAAAAAAAAAAAAwdaWXAXAwwwwwwwwwwwggfawww",
+                num:60,
+                num1:98
+        },
+            methods:{       //当前vue应用中自定义的方法
+                showMsg(){
+                    alert(this.msg)
+                },
+                showTest(n1){
+                    alert(n1)
+                },
+                test(){
+                    alert("测试菜市场上厕所测试")
+                },
+                test2(){
+                    alert("test22222222222222222222222222222222222测试菜市场上厕所测试")
+                }
+            }         
+        })
+    </script>
+</body>
+</html>

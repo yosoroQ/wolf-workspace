@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信随机红包</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box1 {
+            display: block;
+        }
+
+        .box2 {
+            display: none;
+        }
+
+        .hb-list {
+            width: 100%;
+        }
+
+        .hb-list li {
+            width: 80px;
+            height: 100px;
+            /* border: 1px solid #000; */
+
+            float: left;
+            margin: 0 20px;
+            transform-style: preserve-3d;
+        }
+
+        .hb-list li b {
+            display: block;
+            width: 80px;
+            height: 100px;
+
+            background: no-repeat url(./hb.webp) center;
+            background-size: 195%;
+
+            animation: hb-run 2s linear 1;
+            animation-fill-mode: forwards;
+            animation-play-state: paused;
+        }
+
+        @keyframes hb-run {
+            0% {
+                transform: rotateY(180deg);
+            }
+
+            100% {
+                transform: rotateY(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1" id="box1">
+        <p>
+            请输入红包总金额：<input type="text" id="total">
+        </p>
+        <p>
+            请输入红包总个数：<input type="text" id="number">
+        </p>
+        <p>
+            <button id="pushMoney">发红包</button>
+        </p>
+    </div>
+    <div class="box2" id="box2">
+        <h3>
+            红包总金额：<span id="showTotal"></span>
+        </h3>
+        <h3>
+            红包总个数：<span id="showNumber"></span>
+        </h3>
+        <!-- <button id="getMoney">抢红包</button> -->
+        <ul class="hb-list" id="hb-list">
+            <!-- <li>
+                <b></b>
+            </li>
+            <li>
+                <b></b>
+            </li>
+            <li>
+                <b></b>
+            </li> -->
+        </ul>
+    </div>
+</body>
+<script>
+    /*
+        微信随机红包功能：
+        1、 让用户输入发红包的总金额
+        2、 让用户输入一共发多少个红包
+        3、 发（抢）红包
+
+        功能流程：
+        1、 点击发红包后，发红包的元素隐藏，抢红包的元素显示
+        2
+    */
+
+    // 定义公共变量
+    let total = 0       // 总金额
+    let totalNum = 0    // 总金额的随机最大值
+    let num = 0         // 总红包个数
+    let tempNum = 0     // 临时计数红包数的变量
+    let hb_list = []    // 总红数据的数组
+
+
+
+    // 获取页面出发红包的按钮元素
+    let push_btn = document.getElementById("pushMoney")
+
+    // 给发红包的按钮元素添加事件
+    push_btn.addEventListener("click", function () {
+        // 1. 隐藏发红包的组件元素
+        // 1.1 获取发红包的组件元素
+        let box1Ele = document.getElementById("box1")
+
+        // 1.2 把元素隐藏
+        box1Ele.style.display = "none"
+
+        // 2. 显示抢红包的元素组件
+        // 2.1 获取抢红包的元素组件
+        let box2Ele = document.getElementById("box2")
+
+        // 2.2 把元素显示
+        box2Ele.style.display = "block"
+
+        // 3. 获取对应的数据
+        // 3.1 红包的总金额
+        total = document.getElementById("total").value
+        // 3.2 红包的个数
+        num = document.getElementById("number").value
+        tempNum = num
+
+        // 3.3 红包的初始最大值设置
+        totalNum = total * 100
+
+        // 3.3 把数据显示到页面中对应的地方
+        document.getElementById("showTotal").innerText = total
+        document.getElementById("showNumber").innerText = num
+
+        // 4. 通过循环，直接生成对应红包的数据到hb_list
+        for (let i = 0; i < num; i++) {
+            hb_list.push(makeHb())
+        }
+
+        console.log(hb_list)
+        // 4.2 为了保证公平性，需要把数组打乱顺序
+        // let arr = [21, 4, 15, 12, 551, 2251, 651]
+        for (let i = 0; i < 10; i++) {
+            hb_list.sort(function () {
+                return Math.random() - 0.5
+            })
+        }
+
+
+        console.log(hb_list)
+
+        // 5. 根据生成红包的数据生成HTML的内容
+        let listEle = document.getElementById("hb-list")
+        // 5.2 通过拼接字符串的方法，把数组中的数据进行拼接成HTML代码 
+        let li_html = ""
+        for (let i = 0; i < hb_list.length; i++) {
+            // li_html += "<li>" + (hb_list[i] / 100) + "</li>"
+            li_html += "<li> <b>" + (hb_list[i] / 100) + "</b></li>"
+        }
+
+        // 5.3 把拼接好的HTML代码放页面中
+        listEle.innerHTML = li_html
+
+        // 6. 给页面中的按键元素添加事件
+        // let btns = listEle.getElementsByTagName("button")
+        // // 6.1 通过循环完成事件绑定
+        // for (let i = 0; i < btns.length; i++) {
+        //     btns[i].addEventListener("click", function () {
+        //         // alert(hb_list[i] / 100)
+        //         btns[i].innerText = hb_list[i] / 100 + "元"
+        //     })
+        // }
+
+        // 6. 给页面中的按键元素添加事件
+        let hbEles = listEle.getElementsByTagName("b")
+        // 6.1 通过循环完成事件绑定
+        for (let i = 0; i < hbEles.length; i++) {
+            hbEles[i].addEventListener("click", function () {
+                this.style.animationPlayState = "running"
+            })
+        }
+    })
+
+    // 获取抢红包的按钮
+    let get_btn = document.getElementById("getMoney")
+
+    // 给抢红包绑定事件
+    // get_btn.addEventListener("click", function () {
+    //     // 1. 获取页面元素（红包列表）
+    //     let listEle = document.getElementById("hb-list")
+    //     let liEle = listEle.getElementsByTagName("li")
+    //     // console.log(liEle);
+
+    //     // console.log(getRandom(1, 991) / 100);
+    //     // 2. 给元素添加新的数据内容
+    //     // 2.1 判断当前内容并未超出或才等红包的总个数
+    //     if (liEle.length < num) {
+    //         let money = 0
+    //         // 2.1.1 判断是否为最后一个红包
+    //         if (tempNum != 1) {
+    //             console.log(1)
+    //             // 2.1 生成红包的随机金额
+    //             // 由于我们随机数的生成最好是由整数完成。所以把金额先乘100，得到的随机数再除100就是该红包的随机金额
+    //             tempNum--
+    //             let maxNum = totalNum - tempNum  // 每个红包的最大值
+
+    //             money = getRandom(1, maxNum)
+
+    //             // 计算剩余的最大值 (下个红包的最大值 =  现在最大值 - 发出去红包的值)
+    //             totalNum = totalNum - money
+
+    //         } else {
+    //             console.log(2)
+    //             // 最后的一个红包应该是剩余的最的钱
+    //             money = totalNum
+    //         }
+
+    //         // 2.3 未抢完红包时再添加新的数据 
+    //         let list_html = listEle.innerHTML
+    //         listEle.innerHTML = list_html + '<li>' + (money / 100) + '</li>'
+    //     } else {
+    //         alert("红包已经抢完了")
+    //     }
+
+    //     // console.log(total, num)
+    // })
+
+    // 生成随机数的方法
+    function getRandom(min, max) {
+        // Math.random()  生成一个0~1之间的随机数，可能为0不可能为1
+        // 0~10  随机数  Math.round(Math.random() * 10)
+        // 0~100  随机数  Math.round(Math.random() * 100)
+        // 0~1000  随机数  Math.round(Math.random() * 1000)
+        // 0~55  随机数  Math.round(Math.random() * 55)
+        // 30~80  随机数  Math.round(Math.random() * (80-30)) + 30
+
+        let num = Math.round(Math.random() * (max - min)) + min
+
+
+        return num
+    }
+
+    // 生成红包金额的函数
+    function makeHb() {
+        // 2.1.1 判断是否为最后一个红包
+        if (tempNum != 1) {
+            console.log(1)
+            // 2.1 生成红包的随机金额
+            // 由于我们随机数的生成最好是由整数完成。所以把金额先乘100，得到的随机数再除100就是该红包的随机金额
+            tempNum--
+            let maxNum = totalNum - tempNum  // 每个红包的最大值
+
+            money = getRandom(1, maxNum)
+
+            // 计算剩余的最大值 (下个红包的最大值 =  现在最大值 - 发出去红包的值)
+            totalNum = totalNum - money
+
+        } else {
+            console.log(2)
+            // 最后的一个红包应该是剩余的最的钱
+            money = totalNum
+        }
+
+        return money
+    }
+</script>
+
+</html>

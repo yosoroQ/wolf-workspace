@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太阳系</title>
+
+    <style>
+		body{
+			background-color: #4a0f0f;
+		}
+
+		/* 太阳 */
+		.sun{
+            width: 300px;
+            height: 300px;
+            background: orange;
+            box-shadow:  0 0 60px 10px yellow;
+			border-radius: 100%;
+			width: 85px;
+			height: 85px;
+			position: absolute;
+            
+			top: calc(50% - 80px);
+			left: calc(50% - 45.2px);
+			margin: 0;
+            
+			/* 动画 */
+			transition: 0.3s;
+			transition-property: all;   /*应用过渡效果的 CSS*/
+			transition-duration: 0.3s; /*过渡效果持续*/
+			transition-timing-function: ease; /*以相同的速度从开始到结束的过渡效果：*/
+			transition-delay: 0s; /*过渡效果开始前等待：*/
+		}
+	
+		/* 行星动画 */
+		@keyframes rotate {
+			100% {
+				transform: rotate(-360deg);
+			}
+		}
+
+		/* 水星 */
+        /* 最靠近太阳的 */
+		.mercury{
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background-color: #fafafa;
+			position: absolute;
+			top: calc(50% - 74px);
+			left: calc(50% - 74px);
+			transform-origin: 70px 42px;
+			animation: rotate 1.5s infinite linear;
+		}
+
+		/* 水星轨道 */
+		.mercuryOrbit{
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			border: dashed #808080 1px;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: calc(50% - 110px);
+			left: calc(50% - 80px);
+		}
+        
+		/* 金星 */
+        /* 第二环 */
+		.venus{
+			width: 15px;
+			height: 15px;
+			position: absolute;
+			background-color: rgb(246,157,97);
+			border-radius: 50%;
+			transform-origin: 117px 30px;
+			animation: rotate 3.84s infinite linear;
+			left: calc(50% - 120px);
+			top: calc(50% - 65px);
+		}
+
+		/* 金星轨道 */
+		.venusOrbit{
+			width: 220px;
+			height: 220px;
+			background-color: transparent;
+			border-radius: 50%;
+			border: dashed gray 1px;
+			position: absolute;
+			margin: 0;
+			padding: 0;
+			 left: calc(50% - 115px);
+			top: calc(50% - 145px);
+		}
+
+		/* 地球轨道 */
+		.earthOrbit{
+			height: 300px;
+			width: 300px;
+			background-color: transparent;
+			border-radius: 50%;
+			border: dashed gray 1px;
+			margin: 0;
+			padding: 0;
+			left: 251px;
+			position: absolute;
+			left: calc(50% - 155px);
+			top: calc(50% - 185px);
+		}
+		/* 地球 */
+        /* 第三环 */
+		.earth{
+			width: 16px;
+			height: 16px;
+			background: skyblue;
+			border-radius: 50%;
+			position: absolute;
+			transform-origin: 130px 96px;
+			animation: rotate 6.25s infinite linear;
+			left: calc(50% - 133px);
+			top: calc(50% - 130px);
+		}
+		/* 火星轨道 */
+		.marsOrbit{
+			height: 380px;
+			width: 380px;
+			background-color: transparent;
+			border-radius: 50%;
+			position: absolute;
+			border: dashed gray 1px;
+			margin: 0;
+			padding: 0;
+			top: calc(50% - 225px);
+			left: calc(50% - 195px);
+		}
+		/* 火星 */
+        /* 第四环 */
+		.mars{
+			width: 15px;
+			height: 15px;
+			background-color: rgb(140,119,63);
+			border-radius: 50%;
+			position: absolute;
+			transform-origin: 197px 12px;
+			animation: rotate 11.75s infinite linear;
+			top: calc(50% - 45px);
+			left: calc(50% - 200px);
+		}
+		/* 木星轨道 */
+		.jupiterOrbit{
+			width: 490px;
+			height: 490px;
+			background-color: transparent;
+			border-radius: 50%;
+			border: dashed gray 1px;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: calc(50% - 280px);
+			left: calc(50% - 250px);
+		}
+		/* 木星 */
+        /* 第五环 */
+		.jupiter{
+			width: 38px;
+			height: 38px;
+			background-color: rgb(156,164,143);
+			border-radius: 50%;
+			position: absolute;
+			left:308px;
+			top: 414px;
+			transform-origin: 266px 21px;
+			top: calc(50% - 60px);
+			left: calc(50% - 270px);
+			animation: rotate 74.04s infinite linear;
+		}
+		/* 土星轨道 */
+		.saturnOrbit{
+			width: 590px;
+			height: 590px;
+			background-color: transparent;
+			border-radius: 50%;
+			border: dashed gray 1px;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: calc(50% - 330px);
+			left: calc(50% - 300px);
+		}
+		/* 土星*/
+        /* 第六环 */
+		.saturn{
+			width: 42px;
+			height: 42px;
+			background: linear-gradient(#8d6e63, #ffe0b2);
+			border-radius: 50%;
+			position: absolute;
+			transform-origin: 315px 18px;
+			animation: rotate 200.92s infinite linear;
+			top: calc(50% - 60px);
+			left: calc(50% - 320px);
+		}
+		/* 天王星轨道 */
+		.uranusOrbit{
+			height: 690px;
+			width: 690px;
+			background-color: transparent;
+			border-radius: 50%;
+			border: dashed gray 1px;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: calc(50% - 380px);
+			left: calc(50% - 353px);
+		}
+		/* 天王星*/
+        /* 第七环 */
+		.uranus{
+			height: 40px;
+			width: 40px;
+			background-color: rgb(164,192,206);
+			border-radius: 50%;
+			position: absolute;
+			transform-origin: 366px 9px;
+			animation: rotate 370s infinite linear;
+			top: calc(50% - 45px);
+			left: calc(50% - 370px);
+		}
+		/* 海王星轨道 */
+		.neptuneOrbit{
+			width: 780px;
+			height: 780px;
+			background-color: transparent;
+			border-radius: 50%;
+			border: dashed gray 1px;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: calc(50% - 420px);
+			left: calc(50% - 400px);
+		}
+		/* 海王星 */
+        /* 第八环 */
+		.neptune{
+			height: 35px;
+			width: 35px;
+			background-color: rgb(133,136,180);
+			border-radius: 50%;
+			position: absolute;
+			transform-origin: 409px 18px;
+			animation: rotate 500s infinite linear;
+			top: calc(50% - 50px);
+			left: calc(50% - 420px);
+		}
+		</style>
+
+    </style>
+
+</head>
+<body>
+    <div class="solarsys">
+        <!--太阳-->
+        <div class='sun' align = "center">太阳</div>
+
+        <!--水星轨道-->
+        <div class='mercuryOrbit'></div>
+
+        <!--水星-->
+        <div class='mercury'></div>
+
+        <!--金星轨道-->
+        <div class='venusOrbit'></div>
+
+        <!--金星-->
+        <div class='venus'></div>
+
+        <!--地球轨道-->
+        <div class='earthOrbit'></div>
+
+        <!--地球-->
+        <div class='earth'></div>
+
+        <!--火星轨道-->
+        <div class='marsOrbit'></div>
+
+        <!--火星-->
+        <div class='mars'></div>
+
+        <!--木星轨道-->
+        <div class='jupiterOrbit'></div>
+
+        <!--木星-->
+        <div class='jupiter'>木星</div>
+
+        <!--土星轨道-->
+        <div class='saturnOrbit'></div>
+
+        <!--土星-->
+        <div class='saturn'>土星</div>
+
+        <!--天王星轨道-->
+        <div class='uranusOrbit'></div>
+
+        <!--天王星-->
+        <div class='uranus'>天王星</div>
+
+        <!--海王星轨道-->
+        <div class='neptuneOrbit'></div>
+
+        <!--海王星-->
+        <div class='neptune'>海王星</div>
+    </div>
+
+    
+</body>
+</html>

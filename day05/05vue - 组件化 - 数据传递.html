@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05vue-组件化-数据传递.html</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .header {
+            width: 100%;
+            height: 300px;
+            background: hotpink;
+        }
+
+        .content {
+            width: 1300px;
+            height: 800px;
+            background: skyblue;
+            margin: 0 auto;
+        }
+
+        .content-left {
+            width: 35%;
+            height: 800px;
+            background: green;
+            float: left;
+        }
+
+        .content-right {
+            width: 65%;
+            height: 800px;
+            background: rgb(190, 7, 75);
+            float: right;
+        }
+
+        .footer {
+            width: 100%;
+            height: 200px;
+            background: orange;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <p>
+            用户名：<input type="text" v-model="username">
+        </p>
+
+        <!-- 调用A组件 -->
+        <comp-a :username="username" @testchange="getName"></comp-a>
+
+        <!-- 调用B组件 -->
+        <comp-b :username="username"></comp-b>
+        
+    </div>
+
+    <!-- A模板 -->
+    <template id="component-a">
+        <p>
+            A:用户名: <input type="text" :value="username" @change="changeName">
+        </p>
+    </template>
+
+    <!-- B模板 -->
+    <template id="component-b">
+        <p>
+            B:用户名: <input type="text" v-model="username">
+        </p>
+    </template>
+
+    <script>
+        /*
+            1，通过一般事件change，调用子组件的方法changeName
+            2. 在changeName方法中，触发自定义事件testchange 。 方法为： this.$emit(事件名, 需要传递的参数)
+            3. 在组件调用时因为绑定了testchange事件，调用父级getName方法
+        */
+        
+        let compA={
+            template:"#component-a",
+            props:["username"],
+            methods:{
+                changeName(event){
+                    console.log(event.target)
+                    let newName=event.target.value
+                    console.log(newName)
+                    // 触发事件
+                    this.$emit('testchange',newName)
+                }
+            }
+        }
+
+        let compB={
+            template:"#component-b",
+            props:["username"],
+        }
+
+        // Vue应用实例
+        const app = new Vue({
+            el:"#app",
+            data:{
+                username:"6666s"
+            },
+            methods:{
+                getName(newName){
+                    console.log('这里是父组件的方法')
+                    console.log(newName)
+                    this.username=newName
+                }
+            },
+
+            //局部组件注册
+            components:{
+                compA,
+                compB
+            }
+        })
+
+    </script>
+</body>
+</html>

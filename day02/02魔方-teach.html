@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔方</title>
+    <link rel="stylesheet" href="mf_css/mf.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .big-box {
+            width: 800px;
+            height: 500px;
+            border: 1px solid #333;
+
+            margin: 100px auto 0;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(20deg);
+
+            /* animation: big-box-run 3s linear infinite; */
+        }
+
+        @keyframes big-box-run {
+            0% {
+                transform: rotateX(-30deg) rotateY(20deg);
+            }
+
+            100% {
+                transform: rotateX(-30deg) rotateY(380deg);
+            }
+        }
+
+        .big-box>ul {
+            width: 100px;
+            height: 100px;
+            /* border: 1px solid red; */
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -50px 0 0 -50px;
+
+            transform-style: preserve-3d;
+            animation-fill-mode: forwards;
+        }
+
+        .big-box>ul>li {
+            width: 100px;
+            height: 100px;
+
+            position: absolute;
+        }
+
+        .top {
+            background: orange;
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .bottom {
+            background: skyblue;
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        .left {
+            background: green;
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .right {
+            background: hotpink;
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .frout {
+            background: yellow;
+            transform: translateZ(50px);
+        }
+
+        .beforte {
+            background: rgb(255, 0, 242);
+            transform: translateZ(-50px);
+        }
+
+        /* 第一层样式 start */
+        .u-1-1-1 {
+            transform: translateX(-110px) translateY(-110px) translateZ(-110px);
+            animation: run-1-1-1 1s linear 1;
+        }
+
+        .u-2-1-1 {
+            transform: translateX(0px) translateY(-110px) translateZ(-110px);
+            animation: run-2-1-1 1s linear 1;
+        }
+
+        .u-3-1-1 {
+            transform: translateX(110px) translateY(-110px) translateZ(-110px);
+            animation: run-3-1-1 1s linear 1;
+        }
+
+        .u-1-1-2 {
+            transform: translateX(-110px) translateY(-110px) translateZ(0px);
+        }
+
+        .u-2-1-2 {
+            transform: translateX(0px) translateY(-110px) translateZ(0px);
+            animation: run-2-1-2 1s linear 1;
+        }
+
+        .u-3-1-2 {
+            transform: translateX(110px) translateY(-110px) translateZ(0px);
+        }
+
+        .u-1-1-3 {
+            transform: translateX(-110px) translateY(-110px) translateZ(110px);
+        }
+
+        .u-2-1-3 {
+            transform: translateX(0px) translateY(-110px) translateZ(110px);
+        }
+
+        .u-3-1-3 {
+            transform: translateX(110px) translateY(-110px) translateZ(110px);
+        }
+
+        /* 第一层样式 end */
+
+        /* 第二层样式 start */
+        .u-1-2-1 {
+            transform: translateX(-110px) translateY(0px) translateZ(-110px);
+        }
+
+        .u-2-2-1 {
+            transform: translateX(0px) translateY(0px) translateZ(-110px);
+        }
+
+        .u-3-2-1 {
+            transform: translateX(110px) translateY(0px) translateZ(-110px);
+        }
+
+        .u-1-2-2 {
+            transform: translateX(-110px) translateY(0px) translateZ(0px);
+        }
+
+        .u-2-2-2 {
+            transform: translateX(0px) translateY(0px) translateZ(0px);
+        }
+
+        .u-3-2-2 {
+            transform: translateX(110px) translateY(0px) translateZ(0px);
+        }
+
+        .u-1-2-3 {
+            transform: translateX(-110px) translateY(0px) translateZ(110px);
+        }
+
+        .u-2-2-3 {
+            transform: translateX(0px) translateY(0px) translateZ(110px);
+        }
+
+        .u-3-2-3 {
+            transform: translateX(110px) translateY(0px) translateZ(110px);
+        }
+
+        /* 第二层样式 end */
+
+        /* 第三层样式 start */
+        .u-1-3-1 {
+            transform: translateX(-110px) translateY(110px) translateZ(-110px);
+        }
+
+        .u-2-3-1 {
+            transform: translateX(0px) translateY(110px) translateZ(-110px);
+        }
+
+        .u-3-3-1 {
+            transform: translateX(110px) translateY(110px) translateZ(-110px);
+        }
+
+        .u-1-3-2 {
+            transform: translateX(-110px) translateY(110px) translateZ(0px);
+        }
+
+        .u-2-3-2 {
+            transform: translateX(0px) translateY(110px) translateZ(0px);
+        }
+
+        .u-3-3-2 {
+            transform: translateX(110px) translateY(110px) translateZ(0px);
+        }
+
+        .u-1-3-3 {
+            transform: translateX(-110px) translateY(110px) translateZ(110px);
+        }
+
+        .u-2-3-3 {
+            transform: translateX(0px) translateY(110px) translateZ(110px);
+        }
+
+        .u-3-3-3 {
+            transform: translateX(110px) translateY(110px) translateZ(110px);
+        }
+
+        /* 第三层样式 end */
+    </style>
+    
+</head>
+
+<body>
+    <!-- 大舞台元素 -->
+    <div class="big-box">
+        <!-- 第一层 start -->
+        <ul class="u-1-1-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-1-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-1-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+
+        <ul class="u-1-1-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-1-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-1-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+
+        <ul class="u-1-1-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-1-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-1-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <!-- 第一层 end -->
+
+        <!-- 第二层 start -->
+        <ul class="u-1-2-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-2-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-2-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+
+        <ul class="u-1-2-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-2-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-2-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+
+        <ul class="u-1-2-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-2-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-2-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <!-- 第二层 end -->
+
+        <!-- 第三层 start -->
+        <ul class="u-1-3-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-3-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-3-1">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+
+        <ul class="u-1-3-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-3-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-3-2">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+
+        <ul class="u-1-3-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-2-3-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <ul class="u-3-3-3">
+            <li class="top"></li>
+            <li class="bottom"></li>
+            <li class="left"></li>
+            <li class="right"></li>
+            <li class="frout"></li>
+            <li class="beforte "></li>
+        </ul>
+        <!-- 第三层 end -->
+    </div>
+</body>
+
+</html>

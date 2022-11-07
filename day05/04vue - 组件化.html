@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04vue - 组件化</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .header{
+            width: 100%;
+            height: 300px;
+            background:red;
+        }
+
+        .content{
+            width: 1300px;
+            height: 800px;
+            background:bisque;
+            margin: 0 auto;
+        }
+
+        .content-left{
+            width: 35%;
+            height: 800px;
+            background:skyblue;
+            float: left;
+        }
+
+        .content-right{
+            width: 65%;
+            height: 800px;
+            background:yellow;
+            float: right;
+        }
+
+        .footer{
+            width: 100%;
+            height: 200px;
+            background:brown;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div id="app">
+        <!-- 头部 -->
+        <head-component></head-component>
+
+        <!-- 主体内容 -->
+        <content-component></content-component>
+
+
+
+        <!-- 底部 -->
+        <footer-component></footer-component>
+    </div>
+
+    <!-- 主体模板 -->
+    <template id="content">
+        <div class="content">
+            <div class="content-left">
+                <h1>主体左侧</h1>
+            </div>
+            <div class="content-right">
+                <h1>主体右侧</h1>
+            </div>
+        </div>
+    </template>
+
+    <!-- 底部模板 -->
+    <template id="footer">
+        <div class="footer"></div>
+    </template>
+
+    <script>
+        // 组件全局化注册
+        Vue.component('head-component',{
+            template:`<div class="header">
+                <h1>头部</h1>
+                <h1>{{title}}</h1>
+                <h2>{{num1}} + {{num2}} = {{num1 + num2}}</h2>
+                <p>
+                    <button @click="test">来点击</button>
+                </p>
+                </div>`,
+                data(){
+                    return{
+                        num1:20,
+                        num2:40
+                    }
+                },
+
+            // 定义该组件可以从外部接受的变量值
+            props:["title"],
+            methods:{
+                test(){
+                    console.log("test")
+                }
+            }
+        })
+
+        Vue.component('content-component',{
+            template:"#content"
+        })
+
+        //定义组件对象
+        let footerComponent = {
+            template:"#footer"
+        }
+
+        // Vue应用实例
+        const app = new Vue({
+            el:"#app",
+            data:{
+                title:"非机动设计费搜地方"
+            },
+
+            //局部组件注册
+            components:{
+                footerComponent
+            }
+        })
+    </script>
+</body>
+</html>

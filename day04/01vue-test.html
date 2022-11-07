@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <H1>{{msg}}</H1>
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                msg:"你好！"
+        }
+        })
+    </script>
+</body>
+</html>

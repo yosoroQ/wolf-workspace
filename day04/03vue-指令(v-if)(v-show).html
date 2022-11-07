@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03vue-指令(v-if)(v-show)</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+    <!-- 指令 (Directives) 是带有 v- 前缀的特殊 attribute。
+        指令 attribute 的值预期是单个 JavaScript 表达式 (v-for 是例外情况，稍后我们再讨论)。
+        指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。 -->
+
+        <!-- 指令，vue在html容器中使用属性写法来完成一些指定功能实现的语法形式 -->
+    <div id="app">
+        <h1 v-if="showMsg">9999true-if</h1>
+        <!-- <h1>9999</h1> -->
+        <h1 v-else>9999else-false</h1>
+        
+        <button @click="showMsg = !showMsg">切换</button>
+
+
+        <p v-if="user.age>=18">
+            {{user.name}}、{{user.age}}、{{user.sex}}
+        </p>
+
+        <p v-else-if="user.age>=16">
+            {{user.name}}、{{user.age}}、{{user.sex}}
+            <font color="red">未成年</font>
+        </p>
+
+<!-- 
+        v-if是决定元素是否进行渲染（存不存在）
+        v-show只是决定元素是否显示，无论结果如何，页面中该元素都会存在 -->
+
+        <p v-else>
+            <font color="red">太小了</font>
+        </p>
+
+        <h3 v-show="showName">
+            who:li
+        </h3>
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                // showMsg:false,
+                showMsg:true,
+                user:{
+                    name:"小滴",
+                    age:14,
+                    sex :1
+                },
+                // showName:true
+                showName:false
+
+        }
+        })
+    </script>
+</body>
+</html>

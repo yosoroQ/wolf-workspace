@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02vue - 计算属性</title>
+    <!-- 引入Vue框架  -->
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+ 
+<body>
+    <!-- 定义Vue框架应用的执行容器 -->
+    <div id="app">
+        <p>
+            数字1： <input type="text" v-model.number="num1">
+        </p>
+        <p>
+            数字2： <input type="text" v-model.number="num2">
+        </p>
+        <p>
+            结果： {{ count }} {{ count }}
+        </p>
+        <h3>
+            结果： {{ getCount() }} {{ getCount() }}
+        </h3>
+ 
+        <div>
+            <ul>
+                <li v-for="goods in goodsList" :key="goods.id">
+                    商品名： {{goods.name}}, 商品单价：{{goods.price}} ， 商品购买数量：{{goods.number}}
+                </li>
+            </ul>
+            <h3>
+                总计： {{total}}
+            </h3>
+ 
+            <div>
+                姓：<input type="text" v-model="xin">
+                名：<input type="text" v-model="ming">
+ 
+                姓名： <input type="text" v-model.lazy="xinming">
+            </div>
+        </div>
+    </div>
+ 
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                num1: 0,
+                num2: 0,
+                xin: '',
+                ming: '',
+                goodsList: [
+                    { id: 1, name: "小明牌肥皂", price: "50", number: 2 },
+                    { id: 2, name: "两年半的走地鸡", price: "150", number: 10 },
+                    { id: 33, name: "《天才在左，疯子在右》", price: "80", number: 1 },
+                    { id: 25, name: "《三体》", price: "185", number: 1 },
+                ]
+            },
+            methods: {
+                getCount() {
+                    console.log("自定义方法执行")
+                    return this.num1 + this.num2
+                }
+            },
+            // 计算属性
+            computed: {
+                total() {
+                    let total = 0
+ 
+                    this.goodsList.forEach(function (goods) {
+                        total += goods.price * goods.number
+                    })
+ 
+                    return total
+                },
+                xinming: {
+                    // 当相关值发生改变时，计算属性方法会触发
+                    get() {
+                        return this.xin + ' ' + this.ming
+                    },
+                    // 当主计算属性给赋值时执行。
+                    set(newValue) {
+                        let arr = newValue.split(" ")
+                        console.log(arr)
+                        this.xin = arr[1]
+                        this.ming = arr[2]
+                    }
+                },
+                count() {
+                    console.log("计算属性执行")
+                    return this.num1 + this.num2
+                }
+            }
+ 
+        })
+    </script>
+</body>
+ 
+</html>

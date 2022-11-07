@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07vue-数据绑定指令v-model、表单修饰符</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+
+    <!-- v-model指令是用于输入类组件进行数据的双向绑定 -->
+    <!-- js的值发生改变，页面的值也会发生改变 -->
+    <!-- 页面的值发生改变，那js的值也会发生改变 —— —— 双向绑定 -->
+
+
+
+    <div class="tab_con" id="app">
+        <p>
+            <!-- 姓名：<input type="text" :value="name"> -->
+
+            <!-- .trim去除输入的空格 -->
+            <!-- .lazy输入完成后再显示 -->
+
+            姓名：<input type="text" v-model.trim.lazy="name">              
+        </p>
+        <p>
+            姓名：{{name}} {{name.length}}
+        </p>
+        <p>
+            {{num}} <button @click="num+=1">+1</button>
+        </p>
+        <p>
+            学历：<select name="" id="" v-model="level">
+                    <option value="1">xx</option>
+                    <option value="2">xx2</option>
+                    <option value="3">xx3</option>
+                    <option value="4">xx4</option>
+            </select>
+            {{level}}
+        </p>
+
+        <p>
+            性别：<input name="sex" v-model="sex" value="1" type="radio">男
+            <input name="sex" v-model="sex" value="2" type="radio">女
+            {{sex}}
+        </p>
+
+        <p>
+            爱好：<input type="checkbox" v-model="like" value="1">music
+                 <input type="checkbox" v-model="like" value="2">music2
+                <input type="checkbox" v-model="like" value="3">music3
+                <input type="checkbox" v-model="like" value="4">music4
+            {{like}}
+        </p>
+
+        <p>
+            改革开放：<input type="checkbox" v-model="show">{{show}}
+        </p>
+
+        <p>
+            个人介绍：
+            <textarea name="" id="" cols="30" rows="10" v-model="message">
+                <!-- {{message}} -->
+            </textarea>
+        </p>
+        
+        <p>
+            <!-- .number转数字 -->
+            <input type="text" v-model.number="num1">
+            <input type="text" v-model.number="num2"> = {{num1 + num2}}
+        </p>
+
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                name:"allllllllllllllll",
+                num:0,
+                level:1,
+                sex:1,
+                like:['1','2'],
+                show:false,
+                message:"666666666666666666666666666666",
+                num1:0,
+                num2:0,
+        }
+        })
+    </script>
+</body>
+</html>

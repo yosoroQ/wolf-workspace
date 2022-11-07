@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03vue - 案例 - 购书管理</title>
+    <!-- 引入Vue框架  -->
+    <script src="vue.min.js"></script>
+    <style>
+        .big-box {
+            width: 500px;
+            margin: 100px auto;
+ 
+        }
+    </style>
+</head>
+ 
+<body>
+    <!-- 定义Vue框架应用的执行容器 -->
+    <div id="app">
+        <div class="big-box">
+            <div>
+                添加新的书：<br>
+                书名：<input type="text"><br>
+                价格：<input type="text"><br>
+                出版日期： <input type="text"><br>
+                数量: <input type="text"><br>
+                <button>确认添加</button>
+            </div>
+            <table border="1" width="500">
+                <thead>
+                    <tr>
+                        <th v-for=" title in tableTitles">{{title}}</th>
+                        <!-- <th>书籍编号</th>
+                        <th>书籍名称</th>
+                        <th>价格</th>
+                        <th>出版日期</th>
+                        <th>数量</th>
+                        <th>操作</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(book, index) in books">
+                        <td>{{index + 1}}</td>
+                        <td>{{book.name}}</td>
+                        <td>
+                            <img :src="book.img" width="100" alt="">
+                        </td>
+                        <td>{{book.price}}</td>
+                        <td>{{book.date}}</td>
+                        <td>
+                            <button v-if="book.num>1" @click="add(-1,index)">-</button>
+                            {{book.num}}
+                            <button @click="add(1,index)">+</button>
+                        </td>
+                        <td>
+                            <button @click="del(index)">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>总价格:{{total}}</div>
+        </div>
+ 
+    </div>
+ 
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                tableTitles: [
+                    '书籍编号',
+                    '书籍名称',
+                    '封面',
+                    '价格',
+                    '出版日期',
+                    '数量',
+                    '操作',
+                ],
+                books: [
+                    {
+                        name: '算法导论',
+                        date: '2006-9',
+                        price: 85,
+                        num: 1,
+                        img: "./images/1.png",
+                    },
+                    {
+                        name: 'UNIX编程艺术',
+                        date: '2006-2',
+                        price: 59,
+                        num: 1,
+                        img: "./images/2.png",
+ 
+                    },
+                    {
+                        name: 'Vue程序设计',
+                        date: '2008-10',
+                        price: 35,
+                        img: "./images/3.png",
+                        num: 1
+                    },
+                    {
+                        name: '颈椎康复',
+                        date: '2006-3',
+                        img: "./images/4.png",
+                        price: 129,
+                        num: 1
+                    },
+                ]
+            },
+            // 定义自定义事件
+            methods: {
+                // 删除书的数据
+                del(index) {
+                    this.books.splice(index, 1)
+                },
+                // 修改书本的数量的方法
+                add(num, index) {
+                    this.books[index].num += num
+                    if (this.books[index].num <= 0) {
+                        this.books[index].num = 1
+                    }
+                }
+            },
+            // 定义计算属性
+            computed: {
+                total() {
+                    let total = 0
+                    this.books.forEach(book => {
+                        total += book.price * book.num
+                    });
+ 
+                    return total
+                }
+            }
+        })
+    </script>
+</body>
+ 
+</html>

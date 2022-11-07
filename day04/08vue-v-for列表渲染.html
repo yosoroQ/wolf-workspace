@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08vue-v-for列表渲染.html</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <H1>饮料表</H1>
+        <ul>
+            <li v-for="(item,index) in arr" :key="index">{{item}}</li>
+        </ul>
+        <H1>用户表</H1>
+        <ul>
+            <li v-for="item in arr2">
+                姓名：{{item.name}}，年龄：{{item.age}}，性别：{{item.sex==1?'男':'女'}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        //实例化vue
+        let app = new Vue({
+            //vue应用配置
+            el:"#app",   //当前vue实例的执行容器
+            data:{     //当前vue应用的默认数据
+                arr:[
+                    '可乐',
+                    'dd',
+                    'dd2',
+                    'dd3',
+                    'dd4',
+                    'dd5',
+                ],
+                arr2:[
+                    {name:"小米",age:18,sex:1},
+                    {name:"小米2",age:8,sex:1},
+                    {name:"小米3",age:118,sex:2},
+                    {name:"小米4",age:48,sex:2},
+                ]
+        }
+        })
+    </script>
+</body>
+</html>
